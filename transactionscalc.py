@@ -89,19 +89,19 @@ if transactions_file:
 
     output_options = st.multiselect(
         "Select outputs to download:",
-        ["Summary", "Users Between $100 and $2500", "Users Above $2500", "All Users"],
-        default=["Summary", "Users Between $100 and $2500"]
+        ["Summary", "Users Between $250 and $2500", "Users Above $2500", "All Users"],
+        default=["Summary", "Users Between $250 and $2500"]
     )
 
     # 4.1: Users between $100 and $2500
-    if "Users Between $100 and $2500" in output_options:
-        users_100_to_2500 = breakdown_df[(breakdown_df['total_usd'] >= 100) & (breakdown_df['total_usd'] <= 2500)]
+    if "Users Between $250 and $2500" in output_options:
+        users_250_to_2500 = breakdown_df[(breakdown_df['total_usd'] >= 250) & (breakdown_df['total_usd'] <= 2500)]
         st.subheader("Users Between $100 and $2500")
-        st.dataframe(users_100_to_2500)
+        st.dataframe(users_250_to_2500)
         st.download_button(
             "Download Users Between $100 and $2500",
-            users_100_to_2500.to_csv(index=False),
-            "users_100_to_2500_with_breakdown.csv"
+            users_250_to_2500.to_csv(index=False),
+            "users_250_to_2500_with_breakdown.csv"
         )
 
     # 4.2: Users above $2500
@@ -118,7 +118,7 @@ if transactions_file:
     # 4.3: Summary
     if "Summary" in output_options:
         total_users = breakdown_df.shape[0]
-        users_above_100 = breakdown_df[breakdown_df['total_usd'] > 100].shape[0]
+        users_above_100 = breakdown_df[breakdown_df['total_usd'] > 250].shape[0]
         total_usd = breakdown_df['total_usd'].sum()
 
         # Asset breakdown
